@@ -1,0 +1,41 @@
+Semantic UI
+
+1. Added the following to webpack.config.js
+        {
+        test: /\.css$/,
+        include: /node_modules/,
+        use: [
+            {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: "[name]__[local]___[hash:base64:5]"
+            }
+          }
+        ]
+        },
+        {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 100000,
+          },
+        },
+        }
+
+2. Installed the following
+    file-loader
+    font-loader
+    url-loader
+    css-loader
+    style-loader
+    validator
+    prop-proptypes
+    
+
+3. In script.jsx changed
+    import "semantic-ui-css/semantic.min.css";
+    to
+    import "semantic-ui-css/semantic.css";
