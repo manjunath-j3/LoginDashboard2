@@ -1,9 +1,28 @@
 import React from "react";
 import { Form, Button } from "semantic-ui-React";
 import Validator from "validator";
+import InlineError from "../messages/InlineError"
 
 class LoginForm extends React.Component {
-  state : {
+
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+    this.validate = this.validate.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.state = {
+                    data: {
+                      email: '',
+                      password: ''
+                    },
+                    loading: false,
+                    errors: {}
+                };
+  }
+
+  /* 
+  state = {
         data: {
                 email: "",
                 password: ""
@@ -11,6 +30,7 @@ class LoginForm extends React.Component {
         loading: false,
         errors: {}
   };
+  */ 
 
   /*
       onChange = e =>
@@ -21,22 +41,28 @@ class LoginForm extends React.Component {
 
   //Alternative to the above.
     onChange(e){
+      
       this.setState({
-        data:{[e.target.name]: e.target.value}
-      })
+        data : {[e.target.name]: e.target.value}
+      });
+
     }
 
     onSubmit () {
+      
       const errors = this.validate(this.state.data);
-      this.setState({errors});
+      this.setState({errors});      
     };
 
     validate(data){
       const errors = {}
+      
+      //isEmail will assert if undefined is passed instead of string only
+      if(data.email != undefined && !Validator.isEmail(data.email)) 
+          errors.email = "Invalid email!";
 
-      if(Validator.isEmail(data.email)) errors.email = "Invalid email!";
-
-      if(!data.password) errors.password = "Password cannot be empty!";
+      if(!data.password) 
+          errors.password = "Password cannot be empty!";
 
       return errors;
     }
@@ -44,7 +70,7 @@ class LoginForm extends React.Component {
 
   render() {
 
-    //const { data } = this.state; //enabling this is causing the LoginPage to not render.
+    const { data, errors } = this.state;
 
     return(
         <Form onSubmit = {this.onSubmit}>
@@ -55,10 +81,12 @@ class LoginForm extends React.Component {
               id="email"
               name="email"
               placeholder="example@email.com"
-              //value= {data.email} //enabling this is causing the LoginPage to not render.
+              value= {data.email} 
               onChange={this.onChange}
             />
-          
+            
+          {errors.email && <InlineError text={errors.email}/>}
+
           </Form.Field>
 
           <br/>
@@ -70,9 +98,10 @@ class LoginForm extends React.Component {
               id="password"
               name="password"
               placeholder="Make it secure"
-              //value={this.state.data.password} //enabling this is causing the LoginPage to not render.
+              value={this.state.data.password}
               onChange={this.onChange}
             />
+            {errors.password && <InlineError text={errors.password}/>}
           </Form.Field>
 
           <br/>

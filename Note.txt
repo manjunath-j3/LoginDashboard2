@@ -39,3 +39,11 @@ Semantic UI
     import "semantic-ui-css/semantic.min.css";
     to
     import "semantic-ui-css/semantic.css";
+
+4. For debugging in VSCode, made the following change to index.html
+   Changed 
+      <script src="build/react.min.js"></script>
+   to
+      <script src="build/react.js"></script>
+
+
