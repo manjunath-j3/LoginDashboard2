@@ -10,6 +10,7 @@ class LoginForm extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.validate = this.validate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    
 
     this.state = {
                     data: {
@@ -32,21 +33,40 @@ class LoginForm extends React.Component {
   };
   */ 
 
-  /*
+  /*  For this type of thick arrow function the function is automatically bound (bind) to this component
       onChange = e =>
         this.setState({
           data: { ...this.state.data, [e.target.name]: e.target.value }
       });
     */
 
-  //Alternative to the above.
+  
     onChange(e){
-      
-      this.setState({
-        data : {[e.target.name]: e.target.value}
-      });
 
-    }
+      //debugger;
+
+      /* OLD STYLE
+      var data = {...this.state.data};      
+
+      if([e.target.name] == 'email'){
+        data.email = e.target.value;
+        this.setState({ 
+          data
+        });    
+      }
+
+      if([e.target.name] == 'password'){
+        data.password = e.target.value;
+        this.setState({ 
+          data
+        });    
+      }
+      */
+
+      this.setState({
+        data: { ...this.state.data, [e.target.name]: e.target.value }      
+    })
+  }
 
     onSubmit () {
       
@@ -77,17 +97,17 @@ class LoginForm extends React.Component {
           <Form.Field>
             <label htmlFor="email"> Email </label>
             <input
-              type='email'
+              type="email"
               id="email"
               name="email"
               placeholder="example@email.com"
-              value= {data.email} 
+              value= {this.state.data.email} 
               onChange={this.onChange}
             />
             
           {errors.email && <InlineError text={errors.email}/>}
 
-          </Form.Field>
+          </Form.Field> 
 
           <br/>
 

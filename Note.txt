@@ -46,4 +46,15 @@ Semantic UI
    to
       <script src="build/react.js"></script>
 
+5. To support the spread operator, did the following
+
+    1. npm install --save-dev babel-preset-stage-0
+    2. In webpack.config.js file added 'stage-0' to the presets
+  	    presets: ['es2015', 'react', 'stage-0']
+    3. Added "babel-plugin-transform-es2015-spread": "^6.22.0", to package.json file
+
+
+6. Do not simply copy node_modules folder to create a new project, because several files 
+   inside node_modules contain hardcoded path to the current directory, so when you copy
+   node_modules modules folder to a new project, this old path may not be valid.
 
