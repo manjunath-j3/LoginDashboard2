@@ -1,7 +1,8 @@
 import React from "react";
 import { Form, Button } from "semantic-ui-React";
 import Validator from "validator";
-import InlineError from "../messages/InlineError"
+import InlineError from "../messages/InlineError";
+import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component {
 
@@ -40,7 +41,6 @@ class LoginForm extends React.Component {
       });
     */
 
-  
     onChange(e){
 
       //debugger;
@@ -63,6 +63,9 @@ class LoginForm extends React.Component {
       }
       */
 
+      //data has 'email' and 'password' members, in the following spread operator
+      //if e.target.name is 'email' then the data.email is assigned to e.target.value
+      //and if e.target.name is 'password' then the data.password is assigned to e.target.value
       this.setState({
         data: { ...this.state.data, [e.target.name]: e.target.value }      
     })
@@ -71,7 +74,11 @@ class LoginForm extends React.Component {
     onSubmit () {
       
       const errors = this.validate(this.state.data);
-      this.setState({errors});      
+      this.setState({errors});
+
+      if(Object.keys(errors).length === 0){
+        this.props.submit(this.state.data);
+      }
     };
 
     validate(data){
@@ -94,7 +101,7 @@ class LoginForm extends React.Component {
 
     return(
         <Form onSubmit = {this.onSubmit}>
-          <Form.Field>
+          <Form.Field error={!!errors.email}>
             <label htmlFor="email"> Email </label>
             <input
               type="email"
@@ -104,7 +111,7 @@ class LoginForm extends React.Component {
               value= {this.state.data.email} 
               onChange={this.onChange}
             />
-            
+            <br/>
           {errors.email && <InlineError text={errors.email}/>}
 
           </Form.Field> 
@@ -133,5 +140,11 @@ class LoginForm extends React.Component {
       );
   }
 }
+
+
+LoginForm.propTypes = {
+  submit: PropTypes.func.isRequired
+};
+
 
 export default LoginForm;
