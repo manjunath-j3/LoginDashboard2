@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+https://www.youtube.com/watch?v=NO2DaxhoWHk
+Build Real Web App with React #01
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
 Semantic UI
 
 1. Added the following to webpack.config.js
@@ -57,4 +62,18 @@ Semantic UI
 6. Do not simply copy node_modules folder to create a new project, because several files 
    inside node_modules contain hardcoded path to the current directory, so when you copy
    node_modules modules folder to a new project, this old path may not be valid.
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+https://www.youtube.com/watch?v=RCPMuJ0zYak
+Build Real Web App with React #02
+Rem Zolotykh
+
+1. npm install add redux react-redux redux-thunk
+
+https://github.com/zalmoxisus/redux-devtools-extension
+2. npm install --save redux-devtools-extension
+
 
