@@ -77,6 +77,10 @@ class LoginForm extends React.Component {
       this.setState({errors});
 
       if(Object.keys(errors).length === 0){
+
+        //the props submit is passed in as a property from
+        //LoginPage, so this.props.submit actually calls
+        //the submit function in LoginPage (see LoginPage.js)
         this.props.submit(this.state.data);
       }
     };
